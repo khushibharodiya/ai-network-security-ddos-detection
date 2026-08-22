@@ -1,0 +1,36 @@
+# Dataset files
+dataset/
+notebook/cybersecurity.csv
+
+# Trained model files
+models/
+notebook/model_artifacts/
+
+# Generated outputs
+notebook/stage_outputs/
+outputs/
+
+# CatBoost training files
+notebook/catboost_info/
+
+# Python cache
+__pycache__/
+*/__pycache__/
+*.pyc
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# Environment/secrets
+.env
+.env.*
+!.env.example
+
+# OS files
+.DS_Store
+Thumbs.db
