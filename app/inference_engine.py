@@ -12,7 +12,7 @@ from sklearn.metrics import (
     precision_score, recall_score, f1_score, accuracy_score, roc_auc_score
 )
 
-from notebook.feature_pipeline import (
+from feature_pipeline import (
     build_dataset, make_preprocessor, engineer_features,
     add_behavioral_features, FEATURE_COLUMNS,
 )

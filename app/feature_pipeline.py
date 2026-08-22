@@ -1,16 +1,3 @@
-"""
-feature_pipeline.py
-
-Shared data-loading + feature-engineering module.
-
-This is the SAME feature engineering used in 03_MODEL_TRAINING.py
-(with the dead IP-identity features already removed), pulled out
-into one place so 04_/05_/06_ scripts can import it instead of
-re-pasting ~250 lines of feature code into every file.
-
-Import and call build_dataset() to get back the exact same
-train/val/test split and feature set that 03_MODEL_TRAINING.py uses.
-"""
 
 import pandas as pd
 import ipaddress
