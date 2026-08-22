@@ -9,17 +9,17 @@ Requirements · TXT
 # came up during development.
  
 # ---- Core data handling ----
-pandas==3.0.2
-numpy==2.4.4
+pandas==3.0.3
+numpy==2.4.6
  
 # ---- EDA / visualization (01_EDA.py) ----
-matplotlib==3.10.8
+matplotlib==3.11.0
 seaborn==0.13.2
 plotly==6.9.0
  
 # ---- Machine learning ----
-scikit-learn==1.8.0
-xgboost==3.4.1
+scikit-learn==1.9.0
+xgboost==3.2.0
 imbalanced-learn==0.14.2
  
 # ---- Alternate models (07_EXPANDED_SEARCH_AND_ALT_MODELS.py) ----
@@ -30,8 +30,8 @@ catboost==1.2.10
 joblib==1.5.3
  
 # ---- Dashboard (14_DASHBOARD.py) ----
-streamlit==1.62.0
- 
+streamlit==1.61.0
+ reportlab==5.0.0
 
 
 
