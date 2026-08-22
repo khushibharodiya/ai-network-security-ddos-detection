@@ -308,11 +308,6 @@ evidence the constraint is in the data, not the model.
 
 ---
 
-## 📝 Note
-
-This is an academic/internship project built for learning and demonstration
-purposes. Model results should not be used for production security decisions
-without further validation on real-world traffic data.
 =======
 # ai-network-security-ddos-detection
 AI-powered network security platform for detecting DDoS attacks using machine learning.
