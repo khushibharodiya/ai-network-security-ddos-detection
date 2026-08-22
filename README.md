@@ -103,7 +103,8 @@ source venv/bin/activate      # Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-Place `cybersecurity.csv` in the project root.
+The dataset is expected at `dataset/cybersecurity.csv`.
+The dataset is excluded from GitHub through `.gitignore` because it is a local project asset.
 
 ---
 
@@ -112,26 +113,26 @@ Place `cybersecurity.csv` in the project root.
 ### Run the core ML pipeline
 
 ```bash
-python 01_EDA.py                    # exploratory analysis
-python 02_PREPROCESSING.py          # feature engineering walkthrough
-python 03_MODEL_TRAINING.py         # trains & selects the final model
-python 06_ALL_MODELS_TEST_EVAL.py   # confirms model choice on test data
+python notebook/01_EDA.py                    # exploratory analysis
+python notebook/02_PREPROCESSING.py          # feature engineering walkthrough
+python notebook/03_MODEL_TRAINING.py         # trains & selects the final model
+python notebook/06_ALL_MODELS_TEST_EVAL.py   # confirms model choice on test data
 ```
 
 ### Run live/interactive prediction (console)
 
 ```bash
-python 09_TRAIN_FINAL_MODEL.py      # run once — saves model_artifacts/
-python 10_DDOS_PREDICTION.py        # prompts for traffic details
-python 11_PROBABILITY.py
-python 12_RISK_SCORE_AND_EXPLANATION.py
-python 13_SECURITY_REPORT.py
+python notebook/09_TRAIN_FINAL_MODEL.py      # run once — saves model_artifacts/
+python notebook/10_DDOS_PREDICTION.py        # prompts for traffic details
+python notebook/11_PROBABILITY.py
+python notebook/12_RISK_SCORE_AND_EXPLANATION.py
+python notebook/13_SECURITY_REPORT.py
 ```
 
 ### Launch the dashboard
 
 ```bash
-streamlit run 14_DASHBOARD.py
+python -m streamlit run notebook/14_DASHBOARD.py
 ```
 
 Open the URL shown in your terminal (typically `http://localhost:8501`). From there:
