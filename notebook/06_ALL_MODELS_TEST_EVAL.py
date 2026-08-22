@@ -11,9 +11,11 @@ from xgboost import XGBClassifier
 from imblearn.pipeline import Pipeline
 from imblearn.over_sampling import SMOTE
 from sklearn.metrics import (
-    confusion_matrix, accuracy_score, precision_score, recall_score, f1_score, roc_auc_score
+    confusion_matrix, accuracy_score, precision_score, recall_score, f1_score, roc_auc_score,
+    ConfusionMatrixDisplay, roc_curve, precision_recall_curve, average_precision_score
 )
-
+import matplotlib.pyplot as plt  # ADDED: needed for plotting
+from sklearn.metrics import ConfusionMatrixDisplay, confusion_matrix
 from feature_pipeline import build_dataset, make_preprocessor
 
 
@@ -77,7 +79,9 @@ def best_threshold(y_true, prob):
 
 
 results = []
-
+roc_curves = {}   # ADDED: store fpr/tpr per model for combined ROC plot
+pr_curves = {}     # ADDED: store precision/recall per model for combined PR plot
+confusions = {} 
 for name, pipeline in models.items():
     print("=" * 70)
     print(name)
@@ -95,7 +99,6 @@ for name, pipeline in models.items():
 
     test_prob = pipeline.predict_proba(x_test)[:, 1]
     test_pred = (test_prob >= threshold).astype(int)
-
     test_accuracy = accuracy_score(y_test, test_pred)
     test_precision = precision_score(y_test, test_pred, zero_division=0)
     test_recall = recall_score(y_test, test_pred, zero_division=0)
@@ -110,6 +113,29 @@ for name, pipeline in models.items():
     print(f"F1-Score : {test_f1:.3f}")
     print(f"ROC-AUC  : {test_roc_auc:.3f}")
     print()
+
+    # ============================================================
+    # ADDED: Confusion matrix plot for this model
+    # ============================================================
+    cm = confusion_matrix(y_test, test_pred)
+    confusions[name] = cm
+    fig, ax = plt.subplots(figsize=(5, 4))
+    disp = ConfusionMatrixDisplay(confusion_matrix=cm)
+    disp.plot(ax=ax, cmap="Blues", colorbar=False)
+    ax.set_title(f"Confusion Matrix - {name}")
+    plt.tight_layout()
+    plt.savefig(f"confusion_matrix_{name.replace(' ', '_')}.png", dpi=150)
+    plt.show()
+
+    # ============================================================
+    # ADDED: store ROC curve and PR curve data for combined plots
+    # ============================================================
+    fpr, tpr, _ = roc_curve(y_test, test_prob)
+    roc_curves[name] = (fpr, tpr, test_roc_auc)
+
+    prec_curve, rec_curve, _ = precision_recall_curve(y_test, test_prob)
+    pr_auc = average_precision_score(y_test, test_prob)
+    pr_curves[name] = (prec_curve, rec_curve, pr_auc)
 
     results.append({
         "model": name,
@@ -138,3 +164,45 @@ print(f"\nBest by test F1     : {best_by_f1['model']} "
       f"(recall={best_by_f1['test_recall']:.3f}, precision={best_by_f1['test_precision']:.3f})")
 print(f"Best by test recall : {best_by_recall['model']} "
       f"(recall={best_by_recall['test_recall']:.3f}, precision={best_by_recall['test_precision']:.3f})")
+
+
+
+fig, axes = plt.subplots(2, 2, figsize=(10, 8))
+
+for ax, (name, cm) in zip(axes.ravel(), confusions.items()):
+    disp = ConfusionMatrixDisplay(confusion_matrix=cm)
+    disp.plot(ax=ax, cmap="Blues", colorbar=False)
+    ax.set_title(name)
+
+plt.tight_layout()
+plt.savefig("final_test_confusion_matrix.png", dpi=150)
+plt.show()
+# ============================================================
+#Final combined ROC-AUC plot (all models on one figure)
+# ============================================================
+plt.figure(figsize=(7, 6))
+for name, (fpr, tpr, auc_val) in roc_curves.items():
+    plt.plot(fpr, tpr, label=f"{name} (AUC = {auc_val:.3f})")
+plt.plot([0, 1], [0, 1], linestyle="--", color="gray", label="Chance")
+plt.xlabel("False Positive Rate")
+plt.ylabel("True Positive Rate")
+plt.title("ROC Curve - All Models (Test Set)")
+plt.legend(loc="lower right")
+plt.tight_layout()
+plt.savefig("roc_auc_final.png", dpi=150)
+plt.show()
+
+
+# ============================================================
+#  Final combined PR-AUC plot (all models on one figure)
+# ============================================================
+plt.figure(figsize=(7, 6))
+for name, (prec_curve, rec_curve, pr_auc) in pr_curves.items():
+    plt.plot(rec_curve, prec_curve, label=f"{name} (AP = {pr_auc:.3f})")
+plt.xlabel("Recall")
+plt.ylabel("Precision")
+plt.title("Precision-Recall Curve - All Models (Test Set)")
+plt.legend(loc="lower left")
+plt.tight_layout()
+plt.savefig("pr_auc_final.png", dpi=150)
+plt.show()
