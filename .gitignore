@@ -2,6 +2,21 @@
 __pycache__/
 */__pycache__/
 *.pyc
+*.py[codz]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
 
 # Generated outputs
 outputs/
@@ -11,19 +26,47 @@ notebook/catboost_info/
 # Training artifacts not required for deployment
 notebook/model_artifacts/
 
-# Environment / secrets
-.env
-.env.*
-!.env.example
-
-# Virtual environments
-.venv/
-venv/
-env/
-
-# Jupyter checkpoints
+# Jupyter
 .ipynb_checkpoints/
+.ipynb_checkpoints
+
+# Python testing / cache
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+.cache/
+.mypy_cache/
+.pyre/
+.pytype/
+.ruff_cache/
+
+# Build / distribution
+build/
+dist/
+*.egg-info/
+.eggs/
+*.egg
+*.manifest
+*.spec
 
 # OS files
 .DS_Store
 Thumbs.db
+
+# IDE
+.spyderproject
+.spyproject
+.ropeproject
+.idea/
+
+# VS Code
+.vscode/
+
+# Temporary Python files
+tempCodeRunnerFile.py
+
+# Streamlit secrets
+.streamlit/secrets.toml
