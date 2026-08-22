@@ -1,0 +1,13 @@
+{
+  "threshold": 0.8799999999999996,
+  "val_accuracy": 0.96625,
+  "val_precision": 0.5657894736842105,
+  "val_recall": 0.671875,
+  "val_f1": 0.6142857142857143,
+  "val_roc_auc": 0.8699340820312499,
+  "test_accuracy": 0.963,
+  "test_precision": 0.5375,
+  "test_recall": 0.5375,
+  "test_f1": 0.5375,
+  "test_roc_auc": 0.91275390625
+}

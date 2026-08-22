@@ -1,10 +1,10 @@
 # Dataset files
 dataset/
-notebook/cybersecurity.csv
+#notebook/cybersecurity.csv
 
 # Trained model files
 models/
-notebook/model_artifacts/
+#notebook/model_artifacts/
 
 # Generated outputs
 notebook/stage_outputs/
