@@ -31,7 +31,7 @@ from inference_engine import load_artifacts, predict, generate_security_report
 # PAGE CONFIG
 # ============================================================
 st.set_page_config(
-    page_title="Network Attack Detection Dashboard",
+    page_title="Network Attack Detection",
     page_icon="🛡️",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -242,7 +242,7 @@ hr {
 st.markdown(
     """
 <div class="hero">
-    <h1>🛡️ Network Attack Detection Dashboard</h1>
+    <h1>🛡️ Network Attack Detection</h1>
     <p>
         XGBoost-based traffic classifier — live prediction, risk scoring,
         traffic analysis, rule-based explanation, and security reporting
