@@ -21,6 +21,7 @@ from io import BytesIO
 import numpy as np
 import pandas as pd
 import streamlit as st
+from pathlib import Path
 import plotly.express as px
 import plotly.graph_objects as go
 
@@ -601,7 +602,7 @@ risk levels, model performance and the current security posture.
 
     # Try to use the project CSV automatically.
     try:
-        overview_df = pd.read_csv("cybersecurity.csv")
+        overview_df = pd.read_csv(Path(__file__).resolve().parent / "cybersecurity.csv")
         overview_results = predict(overview_df, artifacts)
     except Exception:
         overview_df = None
@@ -1013,7 +1014,7 @@ with tab_batch:
 
     else:
         try:
-            full_df = pd.read_csv("cybersecurity.csv")
+            full_df = pd.read_csv(Path(__file__).resolve().parent / "cybersecurity.csv")
             raw_df = full_df.sample(
                 min(sample_size, len(full_df)),
                 random_state=42,

@@ -45,8 +45,8 @@ from feature_pipeline import (
     add_behavioral_features, FEATURE_COLUMNS,
 )
 
-
-MODEL_DIR = Path("model_artifacts")
+BASE_DIR = Path(__file__).resolve().parent
+MODEL_DIR = BASE_DIR / "model_artifacts"
 
 # Best hyperparameters found by GridSearchCV in 03_MODEL_TRAINING.py.
 BEST_PARAMS = dict(
