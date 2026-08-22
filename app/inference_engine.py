@@ -18,7 +18,7 @@ from feature_pipeline import (
 )
 
 BASE_DIR = Path(__file__).resolve().parent
-MODEL_DIR = BASE_DIR / "model_artifacts"
+MODEL_DIR = BASE_DIR.parent/"notebook" / "model_artifacts"
 
 # Best hyperparameters found by GridSearchCV in 03_MODEL_TRAINING.py.
 BEST_PARAMS = dict(

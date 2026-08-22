@@ -589,7 +589,7 @@ risk levels, model performance and the current security posture.
 
     # Try to use the project CSV automatically.
     try:
-        overview_df = pd.read_csv(Path(__file__).resolve().parent / "cybersecurity.csv")
+        overview_df = pd.read_csv(Path(__file__).resolve().parent.parent / "dataset" / "cybersecurity.csv")
         overview_results = predict(overview_df, artifacts)
     except Exception:
         overview_df = None
@@ -1001,7 +1001,7 @@ with tab_batch:
 
     else:
         try:
-            full_df = pd.read_csv(Path(__file__).resolve().parent / "cybersecurity.csv")
+            full_df = pd.read_csv(Path(__file__).resolve().parent.parent / "dataset" / "cybersecurity.csv")
             raw_df = full_df.sample(
                 min(sample_size, len(full_df)),
                 random_state=42,
