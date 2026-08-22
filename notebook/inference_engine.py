@@ -1,31 +1,3 @@
-"""
-inference_engine.py
-
-The "FINAL MODEL" layer of the project. Provides:
-
-    FINAL MODEL
-     |
-     +-- DDoS/Attack Prediction     (predict())
-     +-- Probability                (predict())
-     +-- Risk Score                 (risk_score_from_probability())
-     +-- Attack/Benign result       (predict())
-     +-- Rule-based explanation     (generate_explanation())
-     +-- Security Report            (generate_security_report())
-             |
-             v
-          Dashboard               (10_DASHBOARD.py)
-
-This module is imported by both 09_TRAIN_FINAL_MODEL.py (which
-trains the model once and saves it) and 10_DASHBOARD.py (which
-loads the saved model and scores traffic interactively) -- so the
-scoring logic only lives in one place.
-
-The model here uses the SAME baseline feature set as
-03_MODEL_TRAINING.py (not the anomaly-flag features from
-08_TARGETED_ANOMALY_FEATURES.py), matching the earlier decision to
-treat 03's model as the primary/production result and 08 as a
-disclosed secondary experiment.
-"""
 
 import json
 from pathlib import Path
@@ -40,7 +12,7 @@ from sklearn.metrics import (
     precision_score, recall_score, f1_score, accuracy_score, roc_auc_score
 )
 
-from feature_pipeline import (
+from notebook.feature_pipeline import (
     build_dataset, make_preprocessor, engineer_features,
     add_behavioral_features, FEATURE_COLUMNS,
 )
